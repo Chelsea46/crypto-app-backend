@@ -18,25 +18,25 @@ const setLoginUser = asyncHandler(async (req, res) => {
                 console.log('email or password incorrect')
             }else{
                 const id = result[0].id;
+                const name = result[0].name;
+                const userEmail = result[0].email;
 
                 const token = jwt.sign({id: id}, process.env.JWT_SECRET, {
                     expiresIn: process.env.JWT_EXPIRES_IN
                 });
 
                 const cookieOptions = {
-                    domain: 'localhost',
-                    expires: new Date (Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+                    expires: new Date(
+                        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
                     ),
-                    // httpOnly: true,
-                    secure: true,
-                    sameSite: 'none'
-                }
+                    httpOnly: true,
+                };
                 
                     res.cookie('jwt', token, cookieOptions);
-                    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
-                    res.setHeader('Access-Control-Allow-Credentials', 'true');
+                    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+                    // res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-                    res.status(200).json({ message: "success" });
+                    res.status(200).json({ success: true, token, user: {name, userEmail, id}});
 
             }
         });

@@ -8,17 +8,18 @@ dotenv.config({ path: './.env' });
 const db = require("./config/db");
 const app = express();
 
-app.use(cors());
-
 const corsOptions = {
-    origin: "*", // Allow all origins
-    credentials: true, // Enable credentials (cookies, authorization headers)
-  };
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    
+};
   
 app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(cookieParser());
-// app.use(express.urlencoded({ extended: false }));
+
 
 db.start.connect((error) => {
     if (error) {
