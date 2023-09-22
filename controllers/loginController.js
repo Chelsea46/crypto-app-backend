@@ -33,8 +33,6 @@ const setLoginUser = asyncHandler(async (req, res) => {
                 };
                 
                     res.cookie('jwt', token, cookieOptions);
-                    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
-                    // res.setHeader('Access-Control-Allow-Credentials', 'true');
 
                     res.status(200).json({ success: true, token, user: {name, userEmail, id}});
 
