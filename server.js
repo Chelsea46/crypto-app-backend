@@ -9,7 +9,7 @@ const db = require("./config/db");
 const app = express();
 
 const corsOptions = {
-    origin: 'https://chelsea-cryptoapp.netlify.app/',
+    origin: 'https://chelsea-cryptoapp.netlify.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     
